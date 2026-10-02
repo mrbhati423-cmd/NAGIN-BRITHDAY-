@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday Anjali! 🐍✨</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #050511;
+            --primary-pink: #ff758c;
+            --primary-purple: #a18cd1;
+            --primary-blue: #64b5f6;
+            --accent-gold: #ffd166;
+            --text-light: #f8f9fa;
+            --text-subtle: #cbd5e1;
+            --glass-bg: rgba(20, 20, 45, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --glass-glow: rgba(161, 140, 209, 0.25);
+            --font-main: 'Outfit', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            --font-hand: 'Caveat', cursive;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: var(--bg-deep);
+            color: var(--text-light);
+            font-family: var(--font-main);
+            font-size: 16px;
+        }
+
+        /* Fixed Background Canvas */
+        #universeCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Dreamy Moon */
+        .moon-orb {
+            position: fixed;
+            top: 7vh;
+            right: 7vw;
+            width: 92px;
+            height: 92px;
+            border-radius: 50%;
+            z-index: 1;
+            pointer-events: none;
+            background: radial-gradient(circle at 35% 32%, #fffdf2 0 10%, #f7e8b5 42%, #d7c38d 72%, rgba(215,195,141,0.15) 73%);
+            box-shadow: 0 0 25px rgba(255,240,190,0.55), 0 0 70px rgba(170,150,255,0.18);
+            opacity: 0.9;
+            animation: moonFloat 7s ease-in-out infinite alternate;
+        }
+        .moon-orb::after, .moon-orb::before, .moon-orb span::before {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(145,125,95,0.16);
+        }
+        .moon-orb::after { width: 14px; height: 14px; left: 20px; top: 26px; }
+        .moon-orb::before { width: 9px; height: 9px; right: 20px; top: 17px; }
+        .moon-orb span::before { width: 18px; height: 18px; right: 27px; bottom: 22px; }
+        @keyframes moonFloat {
+            from { transform: translateY(0) rotate(-2deg); }
+            to { transform: translateY(10px) rotate(2deg); }
+        }
+
+        /* Shooting-star glow on the background canvas */
+        @keyframes shootingGlow {
+            0% { opacity: 0; transform: scaleX(0.5); }
+            15% { opacity: 1; }
+            70% { opacity: 1; }
+            100% { opacity: 0; transform: scaleX(1); }
+        }
+
+        /* Main Container Stack */
+        #app {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s ease, visibility 1s ease;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .screen.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Glassmorphism Card Style */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.2rem 1.8rem;
+            max-width: 650px;
+            width: 100%;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4), 0 0 20px var(--glass-glow);
+            margin: auto 0;
+            position: relative;
+            animation: floatCard 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatCard {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-8px); }
+        }
+
+        /* Buttons */
+        .btn-glow {
+            background: linear-gradient(135deg, var(--primary-pink), var(--primary-purple));
+            color: white;
+            border: none;
+            padding: 1rem 2.2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 117, 140, 0.4);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            margin-top: 1.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-main);
+        }
+
+        .btn-glow:hover, .btn-glow:active {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 117, 140, 0.7);
+        }
+
+        /* Typography Styles */
+        h1, h2 {
+            font-family: var(--font-serif);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        h1 { font-size: 2.2rem; }
+        h2 { font-size: 1.8rem; color: #f1f5f9; }
+
+        p.text-p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-subtle);
+            margin-bottom: 1rem;
+            text-align: left;
+            font-weight: 300;
+        }
+
+        .reveal-line {
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .reveal-line.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Audio Waveform Animation */
+        .soundwave-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            height: 40px;
+            margin: 1.5rem 0;
+        }
+
+        .wave-bar {
+            width: 4px;
+            height: 10%;
+            background: linear-gradient(to top, var(--primary-pink), var(--primary-purple));
+            border-radius: 10px;
+            animation: soundWave 1.2s ease-in-out infinite alternate;
+        }
+
+        .wave-bar:nth-child(1) { animation-delay: 0.1s; }
+        .wave-bar:nth-child(2) { animation-delay: 0.3s; }
+        .wave-bar:nth-child(3) { animation-delay: 0.5s; }
+        .wave-bar:nth-child(4) { animation-delay: 0.2s; }
+        .wave-bar:nth-child(5) { animation-delay: 0.4s; }
+
+        @keyframes soundWave {
+            0% { height: 15%; }
+            100% { height: 90%; }
+        }
+
+        /* Nagin Section Animation */
+        .nagin-wrapper {
+            position: relative;
+            margin: 1.5rem 0;
+            padding: 1rem;
+        }
+
+        .nagin-snake {
+            font-size: 4rem;
+            position: absolute;
+            top: -25px;
+            right: 15px;
+            animation: snakePop 3s ease-in-out infinite alternate;
+            transform-origin: bottom center;
+        }
+
+        @keyframes snakePop {
+            0% { transform: translateY(10px) rotate(-10deg); }
+            50% { transform: translateY(-15px) rotate(10deg); }
+            100% { transform: translateY(5px) rotate(-5deg); }
+        }
+
+        /* Interactive Grid Cards */
+        .cards-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            margin: 1.5rem 0;
+        }
+
+        .flip-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .flip-card.open {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--primary-purple);
+            box-shadow: 0 5px 15px rgba(161, 140, 209, 0.2);
+        }
+
+        .flip-card-title {
+            font-weight: 600;
+            color: var(--text-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .flip-card-desc {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.4s ease, margin 0.4s ease;
+            opacity: 0;
+            color: var(--text-subtle);
+            font-size: 0.95rem;
+            margin-top: 0;
+        }
+
+        .flip-card.open .flip-card-desc {
+            max-height: 100px;
+            opacity: 1;
+            margin-top: 0.5rem;
+        }
+
+        /* Interactive Games Style */
+        .game-canvas-area {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 18px;
+            border: 1px dashed rgba(255, 255, 255, 0.15);
+            margin: 1.2rem 0;
+            overflow: hidden;
+        }
+
+        .floating-heart-btn {
+            position: absolute;
+            font-size: 2.2rem;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            filter: drop-shadow(0 0 10px rgba(255, 117, 140, 0.8));
+            animation: pulseMini 1.5s infinite alternate;
+        }
+
+        @keyframes pulseMini {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.15); }
+        }
+
+        .toast-msg {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            color: #1e1b4b;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        /* Star Interactive Grid */
+        .star-sky-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 18px;
+            margin: 1rem 0;
+        }
+
+        .interactive-star {
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.5;
+        }
+
+        .interactive-star:hover, .interactive-star.found {
+            opacity: 1;
+            transform: scale(1.3);
+            filter: drop-shadow(0 0 12px #ffd166);
+        }
+
+        /* Unlock Puzzle Container */
+        .lock-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 1.5rem 0;
+        }
+
+        .lock-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lock-btn.selected {
+            background: linear-gradient(135deg, var(--primary-pink), var(--primary-purple));
+            box-shadow: 0 0 20px var(--primary-pink);
+            border-color: transparent;
+        }
+
+        /* Gift Boxes Container */
+        .gifts-wrapper {
+            display: flex;
+            justify-content: space-around;
+            gap: 12px;
+            margin: 1.5rem 0;
+        }
+
+        .gift-box {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 1.2rem 0.8rem;
+            cursor: pointer;
+            flex: 1;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .gift-box.opened {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 20px rgba(255, 209, 102, 0.3);
+        }
+
+        .gift-icon {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .gift-text {
+            font-size: 0.85rem;
+            color: var(--text-subtle);
+        }
+
+        /* Letter Container */
+        .letter-card {
+            background: rgba(255, 248, 240, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            font-family: var(--font-main);
+            position: relative;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.3);
+        }
+
+        .letter-card::before {
+            content: "💌";
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            font-size: 1.8rem;
+        }
+
+        /* Responsive Tweaks */
+        @media (max-width: 480px) {
+            .glass-card {
+                padding: 1.6rem 1.2rem;
+            }
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.4rem; }
+            p.text-p { font-size: 0.98rem; line-height: 1.65; }
+            .btn-glow { padding: 0.85rem 1.8rem; font-size: 1rem; }
+            .gifts-wrapper { flex-direction: column; }
+            .moon-orb { width: 62px; height: 62px; top: 5vh; right: 5vw; opacity: 0.75; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Universe Background Canvas -->
+    <canvas id="universeCanvas"></canvas>
+    <div class="moon-orb" aria-hidden="true"><span></span></div>
+
+    <!-- Audio Player -->
+    <audio id="bgAudio" autoplay loop preload="auto" playsinline>
+        <source src="birthday-song.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Main Screens Container -->
+    <div id="app">
+
+        <!-- SCREEN 0: Opening Intro -->
+        <div class="screen active" id="screen0">
+            <div class="glass-card">
+                <div id="introSequence">
+                    <p class="text-p reveal-line visible" style="text-align: center; font-size: 1.4rem; color: #cbd5e1;">Pssst... Anjali 👀</p>
+                    <p class="text-p reveal-line" id="intro2" style="text-align: center; font-size: 1.3rem;">Haan... tu hi Nagin. 🐍😂</p>
+                    <p class="text-p reveal-line" id="intro3" style="text-align: center; font-size: 1.2rem;">Aaj tere liye kuch banaya hai...</p>
+                    <p class="text-p reveal-line" id="intro4" style="text-align: center; font-size: 1.1rem; color: var(--primary-pink);">Aur haan... is baar pura dekhna padega. 🤭✨</p>
+                    <p class="text-p reveal-line" id="intro5" style="text-align: center; font-size: 1.1rem;">Because this little universe is only for you. 🌌🤍</p>
+                </div>
+                <button class="btn-glow" id="startBtn" style="display:none; margin: 1.5rem auto 0 auto;" onclick="nextScreen(1)">
+                    Enter the surprise ✨
+                </button>
+            </div>
+        </div>
+
+        <!-- SCREEN 1: Birthday Reveal -->
+        <div class="screen" id="screen1">
+            <div class="glass-card">
+                <div style="font-size: 3rem; margin-bottom: 0.5rem; animation: pulseMini 2s infinite alternate;">💖</div>
+                <h1 style="background: linear-gradient(to right, #ff758c, #ffd166); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    ANJALI
+                </h1>
+                <h2 style="color: #fff; margin-top: 0.5rem;">HAPPY BIRTHDAY ✨🎂</h2>
+                <p class="text-p" style="text-align: center; margin-top: 1rem; color: #f1f5f9;">
+                    Meri favourite Nagin ko birthday ki bohot saari wishes. 🐍🤍✨
+                </p>
+                <button class="btn-glow" onclick="nextScreen(2)" style="margin-top: 1.5rem;">Aage Chalo 🚀</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 2: Paragraph 1 - Random Beginning -->
+        <div class="screen" id="screen2">
+            <div class="glass-card">
+                <h2>Ek random si shuruaat... 👀✨</h2>
+                <div class="para-content">
+                    <p class="text-p reveal-line">Sach bolu toh, jab hum Snapchat pe mile the na, tab maine kabhi nahi socha tha ki ek random si meeting itni achi friendship mein badal jayegi.</p>
+                    <p class="text-p reveal-line">Dheere dheere chats badhti gayi, baatein badhti gayi aur pata hi nahi chala kab tu meri life ke un logon mein aa gayi jinki presence genuinely matter karti hai.</p>
+                    <p class="text-p reveal-line">Tere saath baat karna, random bakchodi karna, serious baatein share karna aur bina kisi reason ke bas timepass karna — ye sab ab normal sa lagta hai, but actually mere liye ye sab kaafi special hai. 🤍✨</p>
+                </div>
+                <button class="btn-glow" id="btn2" style="display:none;" onclick="nextScreen(3)">Proceed ✨</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 3: Game 1 - Catch The Hearts -->
+        <div class="screen" id="screen3">
+            <div class="glass-card">
+                <h2>Catch The Hearts 💗</h2>
+                <p class="text-p" style="text-align: center;">Tap the floating hearts to collect some birthday magic!</p>
+                <div class="game-canvas-area" id="gameArea1">
+                    <div class="toast-msg" id="toast1">Message</div>
+                </div>
+                <p class="text-p" id="game1Status" style="text-align: center; font-size: 0.95rem; color: var(--primary-pink); min-height: 1.5rem;"></p>
+                <button class="btn-glow" id="btn3" style="display:none;" onclick="nextScreen(4)">Continue 🌸</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 4: Paragraph 2 - Voice & Nagin -->
+        <div class="screen" id="screen4">
+            <div class="glass-card">
+                <h2>Teri awaaz... 🎧🤍</h2>
+                <div class="soundwave-container">
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                </div>
+                <div class="para-content">
+                    <p class="text-p reveal-line">Pata hai, mujhe teri awaaz sunna bhi genuinely pasand hai. Kabhi kabhi conversation mein koi special topic bhi nahi hota, bas normal si baat chal rahi hoti hai, phir bhi pata nahi kyun woh moment achha lagta hai.</p>
+                    <p class="text-p reveal-line">Shayad kuch logon ki presence hi aisi hoti hai — unse baat karne ke liye koi special reason nahi chahiye.</p>
+                    <p class="text-p reveal-line">Teri voice sunke aur tujhse baat karke ek alag sa comfort feel hota hai, aur honestly ye chhoti si cheez bhi mere liye kaafi special hai. 🥹🤍✨</p>
+                </div>
+                <button class="btn-glow" id="btn4" style="display:none;" onclick="nextScreen(5)">Next Memory ✨</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 5: Puzzle 1 - Special Star -->
+        <div class="screen" id="screen5">
+            <div class="glass-card">
+                <h2>Find The Special Star 🌠</h2>
+                <p class="text-p" style="text-align: center;">Is sky mein ek star specially aapke liye chamak raha hai... tap to find it!</p>
+                <div class="star-sky-grid" id="starGrid">
+                    <!-- Stars injected dynamically -->
+                </div>
+                <div id="starMessage" style="display:none; margin-top: 1rem;">
+                    <p class="text-p" style="text-align: center; color: var(--accent-gold); font-weight: 500;">Found it! ✨</p>
+                    <p class="text-p" style="text-align: center;">Jaise is sky mein ek star thoda special tha... waise hi meri life mein bhi kuch friendships thodi special hoti hain. 🤍</p>
+                    <p class="text-p" style="text-align: center; color: var(--primary-pink);">Ours is one of them. 🫶🏻✨</p>
+                </div>
+                <button class="btn-glow" id="btn5" style="display:none;" onclick="nextScreen(6)">Meet The Legend 🐍</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 6: Nagin Legend Section -->
+        <div class="screen" id="screen6">
+            <div class="glass-card">
+                <h2>THE LEGEND OF NAGIN 🐍😂</h2>
+                <div class="nagin-wrapper">
+                    <div class="nagin-snake">🐍</div>
+                    <p class="text-p reveal-line" style="text-align: center;">Naam Anjali hai...</p>
+                    <p class="text-p reveal-line" style="text-align: center;">Lekin mere phone mein iska ek aur naam registered hai...</p>
+                    <h1 class="reveal-line" style="color: var(--accent-gold); margin: 1rem 0; font-size: 2.5rem;">NAGIN 🐍😂</h1>
+                    <p class="text-p reveal-line">Ye title kisi normal insaan ko nahi milta. Special people ke liye special naam chahiye. 😂🫶🏻</p>
+                    <p class="text-p reveal-line" style="color: var(--primary-pink); text-align: center;">Birthday ke din thodi innocent acting allowed hai... bas acting hi. 😂🐍</p>
+                </div>
+                <button class="btn-glow" id="btn6" style="display:none;" onclick="nextScreen(7)">Aage Badho 👀</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 7: Paragraph 3 - Understanding -->
+        <div class="screen" id="screen7">
+            <div class="glass-card">
+                <h2>Ek cheez jo mujhe tere baare mein bohot achi lagti hai... 🤍</h2>
+                <div class="para-content">
+                    <p class="text-p reveal-line">Tujhme ek cheez mujhe genuinely achi lagti hai — tu mujhe judge karne ke bajaye samajhne ki koshish karti hai.</p>
+                    <p class="text-p reveal-line">Har baar mujhe apni feelings properly explain karne ki zarurat nahi padti, aur shayad isi wajah se tere saath baat karna itna comfortable lagta hai.</p>
+                    <p class="text-p reveal-line">Main stupid baatein karu, random bakchodi karu ya kabhi serious ho jaun, tu har version mein mujhe samajhne ki koshish karti hai. Aur honestly, aisi understanding har friendship mein nahi milti. 🥹🤍</p>
+                </div>
+                <button class="btn-glow" id="btn7" style="display:none;" onclick="nextScreen(8)">Why You Matter 🫶🏻</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 8: Why You Matter Cards -->
+        <div class="screen" id="screen8">
+            <div class="glass-card">
+                <h2>Why You Matter 🤍</h2>
+                <p class="text-p" style="text-align: center; font-size: 0.95rem;">(Tap each card to open)</p>
+                <div class="cards-grid">
+                    <div class="flip-card" onclick="toggleCard(this)">
+                        <div class="flip-card-title"><span>You understand me. 🫶🏻</span><span>+</span></div>
+                        <div class="flip-card-desc">Har cheez explain karni nahi padti.</div>
+                    </div>
+                    <div class="flip-card" onclick="toggleCard(this)">
+                        <div class="flip-card-title"><span>You listen. 👀🤍</span><span>+</span></div>
+                        <div class="flip-card-desc">Meri random se random baat bhi.</div>
+                    </div>
+                    <div class="flip-card" onclick="toggleCard(this)">
+                        <div class="flip-card-title"><span>You make things comfortable. 🌸</span><span>+</span></div>
+                        <div class="flip-card-desc">Normal conversations bhi special lagti hain.</div>
+                    </div>
+                    <div class="flip-card" onclick="toggleCard(this)">
+                        <div class="flip-card-title"><span>You make me laugh. 😂</span><span>+</span></div>
+                        <div class="flip-card-desc">Even on completely random days.</div>
+                    </div>
+                    <div class="flip-card" onclick="toggleCard(this)">
+                        <div class="flip-card-title"><span>You're simply you. ✨</span><span>+</span></div>
+                        <div class="flip-card-desc">And honestly, that's enough.</div>
+                    </div>
+                </div>
+                <button class="btn-glow" id="btn8" style="display:none;" onclick="nextScreen(9)">Next Memory 🌙</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 9: Paragraph 4 - Random Memories -->
+        <div class="screen" id="screen9">
+            <div class="glass-card">
+                <h2>Kuch moments bas moments nahi rehte... 🌙</h2>
+                <div class="para-content">
+                    <p class="text-p reveal-line">Humari friendship ki sabse achi baat shayad ye hai ki har memory kisi grand event se nahi bani.</p>
+                    <p class="text-p reveal-line">Kabhi random chats, kabhi stupid jokes, kabhi bina kisi reason ke hasi, kabhi normal si baat jo pata nahi kyun yaad reh jaati hai — ye chhoti chhoti cheezein hi friendship ko special banati hain.</p>
+                    <p class="text-p reveal-line">Shayad future mein humein in sab exact conversations ka har word yaad bhi na rahe, but mujhe lagta hai ye feeling yaad rahegi ki ek time par hum dono ne ek dusre ke days ko thoda better banaya tha. 🥹🌙🤍</p>
+                </div>
+                <button class="btn-glow" id="btn9" style="display:none;" onclick="nextScreen(10)">Save The Heart 🤍</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 10: Game 2 - Save The Heart -->
+        <div class="screen" id="screen10">
+            <div class="glass-card">
+                <h2>Save The Heart 🤍</h2>
+                <p class="text-p" style="text-align: center;">Catch the glowing heart moving through space!</p>
+                <div class="game-canvas-area" id="gameArea2">
+                    <div class="floating-heart-btn" id="movingHeart" onclick="catchHeart2()" style="top: 40%; left: 40%;">🤍</div>
+                </div>
+                <div id="game2Success" style="display:none;">
+                    <p class="text-p" style="text-align: center; color: var(--accent-gold);">Caught it! 🤍✨</p>
+                    <p class="text-p" style="text-align: center;">Ye heart ab officially Nagin ke paas safe hai. 😂🐍</p>
+                    <p class="text-p" style="text-align: center; color: var(--primary-pink);">Important message unlocked 💌</p>
+                </div>
+                <button class="btn-glow" id="btn10" style="display:none;" onclick="nextScreen(11)">Read Message 💌</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 11: Paragraph 5 - Thank You -->
+        <div class="screen" id="screen11">
+            <div class="glass-card">
+                <h2>Thank you... seriously. 🥹🤍</h2>
+                <div class="para-content">
+                    <p class="text-p reveal-line">Thank you meri life mein aane ke liye. 🤍 Sach mein, shayad maine kabhi properly bola nahi, but I'm genuinely thankful that I met you.</p>
+                    <p class="text-p reveal-line">Thank you meri random baatein sunne ke liye, mujhe samajhne ke liye, meri bakchodi tolerate karne ke liye aur meri life ka ek itna achha part banne ke liye.</p>
+                    <p class="text-p reveal-line">Kabhi kabhi hum kisi ko ye batana bhool jaate hain ki woh humare liye kitna important hai, isliye aaj birthday ke bahane bol raha hoon — I'm really, really glad that you're my friend. 🥹🫶🏻✨</p>
+                </div>
+                <button class="btn-glow" id="btn11" style="display:none;" onclick="nextScreen(12)">Unlock Secret 🔐</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 12: Puzzle 2 - Unlock Secret -->
+        <div class="screen" id="screen12">
+            <div class="glass-card">
+                <h2>Ek secret locked hai... 🔐🤍</h2>
+                <p class="text-p" style="text-align: center;">Tap all 3 magical symbols to break the seal!</p>
+                <div class="lock-container">
+                    <div class="lock-btn" id="lock1" onclick="toggleLock(1)">✨</div>
+                    <div class="lock-btn" id="lock2" onclick="toggleLock(2)">🤍</div>
+                    <div class="lock-btn" id="lock3" onclick="toggleLock(3)">🐍</div>
+                </div>
+                <div id="lockReveal" style="display:none;">
+                    <h2 style="color: var(--accent-gold); text-align: center;">SECRET UNLOCKED 💌</h2>
+                    <p class="text-p" style="text-align: center;">You're officially stuck with this friendship now. 😂🤍</p>
+                    <p class="text-p" style="text-align: center; color: var(--primary-pink); font-size: 0.95rem;">No refunds. No cancellations. Terms & conditions apply. 🐍😂</p>
+                </div>
+                <button class="btn-glow" id="btn12" style="display:none;" onclick="nextScreen(13)">Claim Your Gifts 🎁</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 13: Game 3 - Gift Boxes -->
+        <div class="screen" id="screen13">
+            <div class="glass-card">
+                <h2>Three Special Gifts 🎁</h2>
+                <p class="text-p" style="text-align: center;">Open all three gifts!</p>
+                <div class="gifts-wrapper">
+                    <div class="gift-box" id="gift1" onclick="openGift(1)">
+                        <span class="gift-icon">🎁</span>
+                        <div class="gift-text" id="giftText1">Gift 1</div>
+                    </div>
+                    <div class="gift-box" id="gift2" onclick="openGift(2)">
+                        <span class="gift-icon">🎁</span>
+                        <div class="gift-text" id="giftText2">Gift 2</div>
+                    </div>
+                    <div class="gift-box" id="gift3" onclick="openGift(3)">
+                        <span class="gift-icon">🎁</span>
+                        <div class="gift-text" id="giftText3">Gift 3</div>
+                    </div>
+                </div>
+                <button class="btn-glow" id="btn13" style="display:none;" onclick="nextScreen(14)">Wish For You 🎂</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 14: Paragraph 6 - Birthday Wishes -->
+        <div class="screen" id="screen14">
+            <div class="glass-card">
+                <h2>Birthday girl ke liye ek wish... 🎂✨</h2>
+                <div class="para-content">
+                    <p class="text-p reveal-line">Meri wish bas itni si hai ki tera ye saal bohot saari achhi memories lekar aaye.</p>
+                    <p class="text-p reveal-line">Jo cheezein tu chahti hai, unke aur close jaaye; jo dreams hain, unhe achieve kare; aur life tujhe har din koi na koi reason de smile karne ka.</p>
+                    <p class="text-p reveal-line">Tere aas-paas hamesha aise log rahein jo tujhe genuinely samjhein aur khush dekhna chahein.</p>
+                    <p class="text-p reveal-line" style="color: var(--primary-pink);">Aur haan, jab kabhi life boring lage toh ek Nagin ka dost toh hai hi jo bina reason ke bakchodi karne aa jayega. 😂🤍✨</p>
+                </div>
+                <button class="btn-glow" id="btn14" style="display:none;" onclick="nextScreen(15)">Make A Wish 🌠</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 15: Make A Wish -->
+        <div class="screen" id="screen15">
+            <div class="glass-card">
+                <h2>Birthday girl... ek wish kar. 🌠</h2>
+                <p class="text-p" style="text-align: center;">Tap the shooting star crossing the sky!</p>
+                <div class="game-canvas-area" id="wishArea" style="cursor:pointer;" onclick="triggerWish()">
+                    <div id="shootingStarAnim" style="position:absolute; top:20%; left:-10%; font-size:2rem; transition: all 1.5s linear;">🌠</div>
+                </div>
+                <div id="wishRevealed" style="display:none;">
+                    <p class="text-p" style="text-align: center; color: var(--accent-gold);">I hope this year gives you more reasons to smile than you ever expected. 🤍✨</p>
+                    <p class="text-p" style="text-align: center;">Aur un reasons mein humari stupid conversations bhi included honi chahiye. 😂🫶🏻</p>
+                </div>
+                <button class="btn-glow" id="btn15" style="display:none;" onclick="nextScreen(16)">One Last Thing... 💌</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 16: Paragraph 7 - Final Emotional Letter -->
+        <div class="screen" id="screen16">
+            <div class="glass-card letter-card">
+                <h2 style="font-family: var(--font-hand); font-size: 2.2rem; color: #ffd166;">One last thing... 🤍</h2>
+                <div class="para-content">
+                    <p class="text-p reveal-line">Anjali, life mein bohot log milte hain. Kuch log bas milte hain aur chale jaate hain, kuch log thodi der ke liye important hote hain, aur kuch log bina realize karaye life ka ek achha part ban jaate hain. Tu mere liye unhi logon mein se hai.</p>
+                    <p class="text-p reveal-line">Mujhe nahi pata humari friendship future mein kitni crazy stories banayegi, kitni random conversations hongi ya kitni baar hum ek dusre ki leg pulling karenge, but ek cheez pata hai — I'm genuinely glad that I met you.</p>
+                    <p class="text-p reveal-line">Snapchat pe hui ek random si meeting ka itna achha result hoga, ye maine honestly kabhi expect nahi kiya tha.</p>
+                    <p class="text-p reveal-line">Teri awaaz sunna, tujhse random baatein karna, teri bakchodi sunna aur bas ye jaana ki meri life mein ek aisi dost hai jo mujhe genuinely samajhti hai — ye sab mere liye bohot special hai.</p>
+                    <p class="text-p reveal-line" style="color: #fff; font-weight: 500;">Thank you meri life mein aane ke liye, thank you meri friend banne ke liye aur thank you simply Anjali hone ke liye. 🥹🤍✨</p>
+                </div>
+                <button class="btn-glow" id="btn16" style="display:none;" onclick="triggerGrandFinale()">Celebrate 🎉</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 17: Final Birthday Celebration -->
+        <div class="screen" id="screen17">
+            <div class="glass-card">
+                <h1 style="font-size: 2.5rem; background: linear-gradient(135deg, #ff758c, #ffd166); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    HAPPY BIRTHDAY, ANJALI 🎂✨🤍
+                </h1>
+                <div style="margin: 1.5rem 0;">
+                    <p class="text-p" style="text-align: center; font-size: 1.2rem; color: #fff;">Stay happy. 🌸</p>
+                    <p class="text-p" style="text-align: center; font-size: 1.2rem; color: #fff;">Stay crazy. 😂</p>
+                    <p class="text-p" style="text-align: center; font-size: 1.2rem; color: #fff;">Keep smiling. 🫶🏻</p>
+                    <p class="text-p" style="text-align: center; font-size: 1.2rem; color: #fff;">Keep being you. ✨</p>
+                    <p class="text-p" style="text-align: center; font-size: 1.3rem; margin-top: 1rem; color: var(--primary-pink); font-weight: 600;">
+                        And please... Nagin rehna mat chhodna. 🐍😂🤍
+                    </p>
+                </div>
+                <button class="btn-glow" onclick="nextScreen(18)">To Our Forever Universe 🌌</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 18: Forever Starry Ending Screen -->
+        <div class="screen" id="screen18">
+            <div class="glass-card" style="border: none; background: transparent; box-shadow: none;">
+                <div style="font-size: 4rem; margin-bottom: 1rem;">🐍🤍✨</div>
+                <h1 style="color: #fff; font-size: 2.2rem; text-shadow: 0 0 20px rgba(255,117,140,0.6);">
+                    Happy Birthday, Nagin.
+                </h1>
+                <p class="text-p" style="text-align: center; font-size: 1.15rem; margin-top: 1rem;">
+                    Here's to more laughs, more bakchodi, more random conversations and many more memories. 🫶🏻
+                </p>
+                <p class="text-p" style="text-align: center; font-size: 1.1rem; color: var(--accent-gold); margin-top: 0.8rem;">
+                    Thank you for being a beautiful part of my life as a friend. 🤍
+                </p>
+                <p style="font-family: var(--font-hand); font-size: 1.8rem; color: var(--primary-pink); margin-top: 2rem;">
+                    — Your forever bakchod friend ♡
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        /* -------------------------------------------------------------
+           1. UNIVERSE CANVAS ANIMATION SYSTEM
+        ------------------------------------------------------------- */
+        const canvas = document.getElementById('universeCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Canvas Elements
+        const stars = [];
+        const sparkles = [];
+        const shootingStars = [];
+        let grandFinale = false;
+
+        class Star {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 1.8 + 0.2;
+                this.alpha = Math.random();
+                this.speed = Math.random() * 0.008 + 0.002;
+            }
+            update() {
+                this.alpha += this.speed;
+                if (this.alpha > 1 || this.alpha < 0) this.speed = -this.speed;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(255, 255, 255, ${Math.abs(this.alpha)})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        class TouchSparkle {
+            constructor(x, y, isHeart = false) {
+                this.x = x;
+                this.y = y;
+                this.isHeart = isHeart;
+                this.size = isHeart ? Math.random() * 12 + 8 : Math.random() * 3 + 1;
+                this.vx = (Math.random() - 0.5) * 2;
+                this.vy = (Math.random() - 0.5) * 2 - (isHeart ? 1.5 : 0);
+                this.alpha = 1;
+                this.color = isHeart ? '#ff758c' : (Math.random() > 0.5 ? '#a18cd1' : '#ffd166');
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.alpha -= 0.015;
+            }
+            draw() {
+                ctx.globalAlpha = Math.max(0, this.alpha);
+                if (this.isHeart) {
+                    ctx.font = `${this.size}px serif`;
+                    ctx.fillText('🤍', this.x, this.y);
+                } else {
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.globalAlpha = 1;
+            }
+        }
+
+        class ShootingStar {
+            constructor() {
+                const startFromLeft = Math.random() > 0.35;
+                this.x = startFromLeft ? Math.random() * width * 0.75 : width * (0.55 + Math.random() * 0.35);
+                this.y = Math.random() * height * 0.42;
+                this.length = 80 + Math.random() * 150;
+                this.speed = 7 + Math.random() * 7;
+                this.alpha = 0;
+                this.life = 0;
+                this.maxLife = 55 + Math.random() * 30;
+                this.vx = this.speed;
+                this.vy = this.speed * (0.32 + Math.random() * 0.22);
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.life++;
+                const fadeIn = Math.min(1, this.life / 10);
+                const fadeOut = Math.max(0, (this.maxLife - this.life) / 18);
+                this.alpha = Math.min(fadeIn, fadeOut);
+            }
+            draw() {
+                const tailX = this.x - this.length;
+                const tailY = this.y - this.length * 0.32;
+                const g = ctx.createLinearGradient(this.x, this.y, tailX, tailY);
+                g.addColorStop(0, `rgba(255,255,255,${this.alpha})`);
+                g.addColorStop(0.25, `rgba(255,225,170,${this.alpha * 0.75})`);
+                g.addColorStop(1, 'rgba(161,140,209,0)');
+                ctx.save();
+                ctx.strokeStyle = g;
+                ctx.lineWidth = 2.2;
+                ctx.lineCap = 'round';
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(tailX, tailY);
+                ctx.stroke();
+                ctx.fillStyle = `rgba(255,255,255,${this.alpha})`;
+                ctx.shadowBlur = 14;
+                ctx.shadowColor = '#fff3c4';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 2.2, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        // Initialize Stars
+        for (let i = 0; i < 220; i++) stars.push(new Star());
+
+        // Automatic cinematic shooting stars
+        function spawnShootingStar() {
+            if (shootingStars.length < 3) shootingStars.push(new ShootingStar());
+        }
+        setTimeout(spawnShootingStar, 1800);
+        setInterval(spawnShootingStar, 4800 + Math.random() * 2200);
+
+        // Mouse/Touch Interactive Particles
+        window.addEventListener('pointermove', (e) => {
+            if (Math.random() < 0.4) {
+                sparkles.push(new TouchSparkle(e.clientX, e.clientY, Math.random() < 0.15));
+            }
+        });
+
+        function animateUniverse() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Draw Subtle Nebula Lights
+            const grad = ctx.createRadialGradient(width/2, height/2, 100, width/2, height/2, width);
+            grad.addColorStop(0, grandFinale ? 'rgba(50, 15, 60, 0.8)' : 'rgba(15, 15, 35, 0.6)');
+            grad.addColorStop(1, 'rgba(5, 5, 17, 1)');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, width, height);
+
+            // Update & Draw Stars
+            stars.forEach(s => { s.update(); s.draw(); });
+
+            // Update & Draw Sparkles
+            for (let i = sparkles.length - 1; i >= 0; i--) {
+                sparkles[i].update();
+                sparkles[i].draw();
+                if (sparkles[i].alpha <= 0) sparkles.splice(i, 1);
+            }
+
+            // Update & Draw Shooting Stars
+            for (let i = shootingStars.length - 1; i >= 0; i--) {
+                shootingStars[i].update();
+                shootingStars[i].draw();
+                if (shootingStars[i].life > shootingStars[i].maxLife) shootingStars.splice(i, 1);
+            }
+
+            // Grand Finale Celebration Effect
+            if (grandFinale && Math.random() < 0.1) {
+                sparkles.push(new TouchSparkle(Math.random() * width, Math.random() * height, true));
+            }
+
+            requestAnimationFrame(animateUniverse);
+        }
+        animateUniverse();
+
+
+        /* -------------------------------------------------------------
+           2. AUDIO SYSTEM MANAGEMENT
+        ------------------------------------------------------------- */
+        const audio = document.getElementById('bgAudio');
+        let audioStarted = false;
+
+        function startAudio() {
+            if (audioStarted || !audio) return;
+            const playPromise = audio.play();
+            if (playPromise && typeof playPromise.then === 'function') {
+                playPromise.then(() => {
+                    audioStarted = true;
+                }).catch(() => {
+                    // Browsers such as Chrome may block audible autoplay.
+                    // The first tap/click anywhere will retry automatically.
+                });
+            }
+        }
+
+        audio.addEventListener('play', () => { audioStarted = true; });
+        audio.addEventListener('error', () => {
+            console.warn('Background audio could not be loaded. Make sure birthday-song.mp3 is beside this HTML file.');
+        });
+
+        // Try true autoplay as soon as the page loads.
+        window.addEventListener('load', () => {
+            startAudio();
+        });
+
+        // Fallback for browsers that block audible autoplay: no music button is needed.
+        // The first user interaction automatically starts the song.
+        document.addEventListener('pointerdown', () => {
+            if (!audioStarted) startAudio();
+        }, { once: true, passive: true });
+
+        /* -------------------------------------------------------------
+           3. SCREEN & PARAGRAPH FLOW CONTROL
+        ------------------------------------------------------------- */
+        let currentScreen = 0;
+
+        // Sequence Opening Animation on Screen 0
+        window.addEventListener('load', () => {
+            setTimeout(() => document.getElementById('intro2').classList.add('visible'), 1500);
+            setTimeout(() => document.getElementById('intro3').classList.add('visible'), 3200);
+            setTimeout(() => document.getElementById('intro4').classList.add('visible'), 4800);
+            setTimeout(() => document.getElementById('intro5').classList.add('visible'), 6500);
+            setTimeout(() => {
+                const btn = document.getElementById('startBtn');
+                btn.style.display = 'inline-flex';
+                btn.classList.add('visible');
+            }, 8200);
+        });
+
+        // Any first real user interaction can unlock audio on mobile browsers.
+        document.addEventListener('pointerdown', () => {
+            if (!audioStarted && audio.paused) startAudio();
+        }, { once: true });
+
+        function nextScreen(index) {
+            startAudio(); // Fallback for browsers that block autoplay
+
+            document.getElementById(`screen${currentScreen}`).classList.remove('active');
+            currentScreen = index;
+            const nextScr = document.getElementById(`screen${currentScreen}`);
+            nextScr.classList.add('active');
+
+            // Trigger paragraph line reveals automatically when screen opens
+            revealParagraphs(nextScr);
+
+            // Special initializers per screen
+            if (index === 3) initGame1();
+            if (index === 5) initStarPuzzle();
+            if (index === 10) initGame2();
+        }
+
+        function revealParagraphs(screenEl) {
+            const lines = screenEl.querySelectorAll('.para-content .reveal-line, .nagin-wrapper .reveal-line');
+            const btn = screenEl.querySelector('.btn-glow');
+            
+            lines.forEach((line, i) => {
+                setTimeout(() => {
+                    line.classList.add('visible');
+                }, (i + 1) * 1200);
+            });
+
+            if (btn && lines.length > 0) {
+                setTimeout(() => {
+                    btn.style.display = 'inline-flex';
+                    btn.classList.add('visible');
+                }, (lines.length + 1) * 1200);
+            }
+        }
+
+
+        /* -------------------------------------------------------------
+           4. MINI-GAMES & PUZZLES IMPLEMENTATION
+        ------------------------------------------------------------- */
+
+        // Game 1: Catch Hearts
+        let heartsCaught1 = 0;
+        const toasts1 = ["Hehe 🤭🤍", "Nagin detected 🐍😂", "One more! ✨", "Birthday magic +1 🌸"];
+
+        function initGame1() {
+            const area = document.getElementById('gameArea1');
+            area.querySelectorAll('.floating-heart-btn').forEach(h => h.remove());
+            heartsCaught1 = 0;
+            spawnHeart1();
+        }
+
+        function spawnHeart1() {
+            if (heartsCaught1 >= 4) return;
+            const area = document.getElementById('gameArea1');
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart-btn';
+            heart.innerText = '💗';
+            heart.style.top = `${Math.random() * 60 + 15}%`;
+            heart.style.left = `${Math.random() * 70 + 15}%`;
+            
+            heart.onclick = () => {
+                showToast1(toasts1[heartsCaught1 % toasts1.length]);
+                heartsCaught1++;
+                heart.remove();
+                if (heartsCaught1 < 4) {
+                    spawnHeart1();
+                } else {
+                    document.getElementById('game1Status').innerText = "Okayyy... itne hearts toh ek Nagin ke liye enough hain. 😂🤍\nYou deserve a whole sky full of them. ✨";
+                    const btn = document.getElementById('btn3');
+                    btn.style.display = 'inline-flex';
+                }
+            };
+            area.appendChild(heart);
+        }
+
+        function showToast1(msg) {
+            const t = document.getElementById('toast1');
+            t.innerText = msg;
+            t.style.opacity = 1;
+            setTimeout(() => { t.style.opacity = 0; }, 1200);
+        }
+
+        // Star Puzzle 1
+        function initStarPuzzle() {
+            const grid = document.getElementById('starGrid');
+            grid.innerHTML = '';
+            const specialIndex = Math.floor(Math.random() * 8);
+
+            for (let i = 0; i < 8; i++) {
+                const star = document.createElement('div');
+                star.className = 'interactive-star';
+                star.innerText = '⭐';
+                star.onclick = () => {
+                    if (i === specialIndex) {
+                        star.innerText = '🌟';
+                        star.classList.add('found');
+                        document.getElementById('starMessage').style.display = 'block';
+                        document.getElementById('btn5').style.display = 'inline-flex';
+                    } else {
+                        star.style.opacity = 0.2;
+                    }
+                };
+                grid.appendChild(star);
+            }
+        }
+
+        // Card Toggle helper
+        let openCardsCount = 0;
+        function toggleCard(card) {
+            if (!card.classList.contains('open')) {
+                card.classList.add('open');
+                openCardsCount++;
+                if (openCardsCount >= 3) {
+                    document.getElementById('btn8').style.display = 'inline-flex';
+                }
+            }
+        }
+
+        // Game 2: Moving Heart
+        let heartInterval2;
+        function initGame2() {
+            const heart = document.getElementById('movingHeart');
+            heart.style.display = 'block';
+            document.getElementById('game2Success').style.display = 'none';
+            
+            clearInterval(heartInterval2);
+            heartInterval2 = setInterval(() => {
+                heart.style.top = `${Math.random() * 65 + 10}%`;
+                heart.style.left = `${Math.random() * 75 + 10}%`;
+            }, 1000);
+        }
+
+        function catchHeart2() {
+            clearInterval(heartInterval2);
+            document.getElementById('movingHeart').style.display = 'none';
+            document.getElementById('game2Success').style.display = 'block';
+            document.getElementById('btn10').style.display = 'inline-flex';
+        }
+
+        // Puzzle 2: Lock Puzzle
+        const locks = [false, false, false];
+        function toggleLock(idx) {
+            locks[idx - 1] = !locks[idx - 1];
+            document.getElementById(`lock${idx}`).classList.toggle('selected');
+            if (locks[0] && locks[1] && locks[2]) {
+                document.getElementById('lockReveal').style.display = 'block';
+                document.getElementById('btn12').style.display = 'inline-flex';
+            }
+        }
+
+        // Game 3: Gifts
+        let giftsOpened = 0;
+        function openGift(idx) {
+            const box = document.getElementById(`gift${idx}`);
+            if (box.classList.contains('opened')) return;
+
+            box.classList.add('opened');
+            giftsOpened++;
+
+            if (idx === 1) document.getElementById('giftText1').innerText = "Unlimited bakchodi unlocked 😂";
+            if (idx === 2) document.getElementById('giftText2').innerText = "Unlimited random conversations unlocked 💬✨";
+            if (idx === 3) document.getElementById('giftText3').innerText = "One heartfelt birthday message unlocked 🤍";
+
+            if (giftsOpened >= 3) {
+                document.getElementById('btn13').style.display = 'inline-flex';
+            }
+        }
+
+        // Wish Shooting Star
+        let wishTriggered = false;
+        function triggerWish() {
+            if (wishTriggered) return;
+            wishTriggered = true;
+            const star = document.getElementById('shootingStarAnim');
+            star.style.top = '70%';
+            star.style.left = '110%';
+            setTimeout(() => {
+                document.getElementById('wishRevealed').style.display = 'block';
+                document.getElementById('btn15').style.display = 'inline-flex';
+            }, 1200);
+        }
+
+        // Grand Finale Transition
+        function triggerGrandFinale() {
+            grandFinale = true;
+            nextScreen(17);
+        }
+    </script>
+</body>
+</html>
